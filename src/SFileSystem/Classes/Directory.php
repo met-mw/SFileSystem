@@ -73,4 +73,79 @@ class Directory extends IO implements InterfaceIODirectory
         return $this;
     }
 
+    public function delete()
+    {
+        if (!$this->exists()) {
+            return $this;
+        }
+
+        $this->scan();
+        foreach ($this->getDirectories() as $Directory) {
+            $Directory->delete();
+        }
+
+        foreach ($this->getFiles() as $File) {
+            $File->delete();
+        }
+
+        rmdir($this->path);
+        return $this;
+    }
+
+    public function moveTo(InterfaceIODirectory $Directory)
+    {
+        if (!$Directory->exists()) {
+            return false;
+        }
+
+        $success = false;
+        if ($this->copyTo($Directory)) {
+            $this->delete();
+            $success = true;
+        }
+
+        return $success;
+    }
+
+    public function appendDirectory($directoryName)
+    {
+        if (!$this->exists()) {
+            return null;
+        }
+
+        return new Directory($this->path . DIRECTORY_SEPARATOR . $directoryName);
+    }
+
+    public function appendFile($fileName)
+    {
+        if (!$this->exists()) {
+            return null;
+        }
+
+        return new File($this->path . DIRECTORY_SEPARATOR . $fileName);
+    }
+
+    public function copyTo(InterfaceIODirectory $Directory)
+    {
+        if (!$Directory->exists()) {
+            return false;
+        }
+
+        $NewDirectory = new Directory($Directory->getPath() . DIRECTORY_SEPARATOR . $this->getName());
+        $this->scan();
+        foreach ($this->getFiles() as $File) {
+            if (!$File->copyTo($NewDirectory)) {
+                return false;
+            }
+        }
+
+        foreach ($this->getDirectories() as $Directory) {
+            if (!$Directory->copyTo($NewDirectory)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

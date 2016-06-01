@@ -6,6 +6,7 @@ interface InterfaceIO
 {
 
     public function create();
+    public function copyTo(InterfaceIODirectory $Directory);
     public function delete();
     public function exists();
     public function getName();

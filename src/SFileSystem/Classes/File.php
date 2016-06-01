@@ -73,16 +73,27 @@ class File extends IO implements InterfaceIOFile
 
     public function moveTo(InterfaceIODirectory $Directory)
     {
-        $success = true;
-
-        if ($Directory->exists()) {
-//            $this->
+        if (!$Directory->exists()) {
+            return false;
         }
+
+        $success = false;
+        if ($this->copyTo($Directory)) {
+            $this->delete();
+            $success = true;
+        }
+
+        return $success;
     }
 
     public function copyTo(InterfaceIODirectory $Directory)
     {
-        // TODO: Implement copyTo() method.
+        if (!$Directory->exists()) {
+            return false;
+        }
+
+        copy($this->getPath(), $Directory->getPath() . DIRECTORY_SEPARATOR . $this->getName());
+        return true;
     }
 
 }

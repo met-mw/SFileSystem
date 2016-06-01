@@ -40,9 +40,4 @@ abstract class IO implements InterfaceIO
         return file_exists($this->path);
     }
 
-    public function delete()
-    {
-        unlink($this->path);
-    }
-
 }

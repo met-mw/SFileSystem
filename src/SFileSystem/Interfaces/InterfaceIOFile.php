@@ -6,7 +6,7 @@ interface InterfaceIOFile extends InterfaceIO
 {
 
     public function appendContent($content);
-    public function copyTo(InterfaceIODirectory $Directory);
+    public function getExtension();
     public function read();
     public function setContent($content);
 
