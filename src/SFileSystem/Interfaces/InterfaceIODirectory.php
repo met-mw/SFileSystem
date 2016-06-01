@@ -5,8 +5,8 @@ namespace SFileSystem\Interfaces;
 interface InterfaceIODirectory extends InterfaceIO
 {
 
-    public function appendDirectory($directoryName);
-    public function appendFile($fileName);
+    public function createDirectory($directoryName);
+    public function createFile($fileName);
     public function getDirectories();
     public function getFiles();
     public function scan($recursive = false);

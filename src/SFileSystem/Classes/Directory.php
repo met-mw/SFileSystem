@@ -107,7 +107,7 @@ class Directory extends IO implements InterfaceIODirectory
         return $success;
     }
 
-    public function appendDirectory($directoryName)
+    public function createDirectory($directoryName)
     {
         if (!$this->exists()) {
             return null;
@@ -116,7 +116,7 @@ class Directory extends IO implements InterfaceIODirectory
         return new Directory($this->path . DIRECTORY_SEPARATOR . $directoryName);
     }
 
-    public function appendFile($fileName)
+    public function createFile($fileName)
     {
         if (!$this->exists()) {
             return null;
