@@ -118,7 +118,7 @@ class Directory extends IO implements InterfaceIODirectory
             return null;
         }
 
-        $NewDirectory = new Directory($this->path . DIRECTORY_SEPARATOR . $directoryName);
+        $NewDirectory = new Directory($this->getPath() . DIRECTORY_SEPARATOR . $directoryName);
         return $NewDirectory->create();
     }
 
@@ -128,7 +128,7 @@ class Directory extends IO implements InterfaceIODirectory
             return null;
         }
 
-        $NewFile = new File($this->path . DIRECTORY_SEPARATOR . $fileName);
+        $NewFile = new File($this->getPath() . DIRECTORY_SEPARATOR . $fileName);
         return $NewFile->create();
     }
 
