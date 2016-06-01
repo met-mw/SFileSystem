@@ -29,9 +29,27 @@ class Directory extends IO implements InterfaceIODirectory
         return $this;
     }
 
+    public function getDirectory($directoryName)
+    {
+        if (!is_dir($directoryName)) {
+            return null;
+        }
+
+        return new Directory($this->getPath() . DIRECTORY_SEPARATOR . $directoryName);
+    }
+
     public function getDirectories()
     {
         return $this->Directories;
+    }
+
+    public function getFile($fileName)
+    {
+        if (!is_dir($fileName)) {
+            return null;
+        }
+
+        return new File($this->getPath() . DIRECTORY_SEPARATOR . $fileName);
     }
 
     public function getFiles()
