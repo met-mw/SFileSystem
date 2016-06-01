@@ -3,6 +3,7 @@ namespace SFileSystem\Classes;
 
 
 
+use Exception;
 use SFileSystem\Interfaces\InterfaceIODirectory;
 use SFileSystem\Interfaces\InterfaceIOFile;
 
@@ -42,6 +43,10 @@ class File extends IO implements InterfaceIOFile
 
     public function create()
     {
+        if ($this->exists()) {
+            throw new Exception("Файл \"{$this->getPath()}\" уже существует.");
+        }
+
         $handler = fopen($this->getPath(), 'w');
         fclose($handler);
 
@@ -50,7 +55,7 @@ class File extends IO implements InterfaceIOFile
 
     public function delete()
     {
-        unlink($this->path);
+        unlink($this->getPath());
         return $this;
     }
 

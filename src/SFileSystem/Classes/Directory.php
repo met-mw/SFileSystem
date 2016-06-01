@@ -2,6 +2,7 @@
 namespace SFileSystem\Classes;
 
 
+use Exception;
 use SFileSystem\Interfaces\InterfaceIODirectory;
 
 class Directory extends IO implements InterfaceIODirectory
@@ -69,6 +70,10 @@ class Directory extends IO implements InterfaceIODirectory
 
     public function create()
     {
+        if ($this->exists()) {
+            throw new Exception("Директория \"{$this->getPath()}\" уже существует.");
+        }
+
         mkdir($this->getPath());
         return $this;
     }
@@ -113,7 +118,8 @@ class Directory extends IO implements InterfaceIODirectory
             return null;
         }
 
-        return new Directory($this->path . DIRECTORY_SEPARATOR . $directoryName);
+        $NewDirectory = new Directory($this->path . DIRECTORY_SEPARATOR . $directoryName);
+        return $NewDirectory->create();
     }
 
     public function createFile($fileName)
@@ -122,7 +128,8 @@ class Directory extends IO implements InterfaceIODirectory
             return null;
         }
 
-        return new File($this->path . DIRECTORY_SEPARATOR . $fileName);
+        $NewFile = new File($this->path . DIRECTORY_SEPARATOR . $fileName);
+        return $NewFile->create();
     }
 
     public function copyTo(InterfaceIODirectory $Directory)
