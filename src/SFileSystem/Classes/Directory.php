@@ -45,7 +45,7 @@ class Directory extends IO implements InterfaceIODirectory
 
     public function getFile($fileName)
     {
-        if (!is_dir($fileName)) {
+        if (!is_file($fileName)) {
             return null;
         }
 
