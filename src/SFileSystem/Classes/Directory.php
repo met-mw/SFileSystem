@@ -31,7 +31,7 @@ class Directory extends IO implements InterfaceIODirectory
 
     public function getDirectory($directoryName)
     {
-        if (!is_dir($directoryName)) {
+        if (!is_dir($this->getPath() . DIRECTORY_SEPARATOR . $directoryName)) {
             return null;
         }
 
@@ -45,7 +45,7 @@ class Directory extends IO implements InterfaceIODirectory
 
     public function getFile($fileName)
     {
-        if (!is_file($fileName)) {
+        if (!is_file($this->getPath() . DIRECTORY_SEPARATOR . $fileName)) {
             return null;
         }
 
