@@ -79,7 +79,7 @@ class Directory extends IO implements InterfaceIODirectory
                     $Directory->scan($recursive);
                 }
             } else {
-                $this->Files[] = new File($this);
+                $this->Files[] = new File($elementPath);
             }
         }
 
