@@ -2,49 +2,49 @@
 namespace SFileSystem\Classes;
 
 
-
 use Exception;
 use SFileSystem\Interfaces\InterfaceIODirectory;
 use SFileSystem\Interfaces\InterfaceIOFile;
 
+/**
+ * Class File
+ * @package SFileSystem\Classes
+ */
 class File extends IO implements InterfaceIOFile
 {
 
-    public function getName()
+    /**
+     * @param string $content
+     * @return File
+     */
+    public function appendContent($content)
     {
-        return basename($this->getPath());
-    }
-
-    public function getExtension()
-    {
-        return pathinfo($this->getPath(), PATHINFO_EXTENSION);
-    }
-
-    public function getParentDirectory()
-    {
-        return new Directory(dirname($this->getPath()));
-    }
-
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    public function setPath($path)
-    {
-        $this->path = $path;
+        file_put_contents($this->getPath(), $content, FILE_APPEND);
         return $this;
     }
 
-    public function exists()
+    /**
+     * @param InterfaceIODirectory $Directory
+     * @return bool
+     */
+    public function copyTo(InterfaceIODirectory $Directory)
     {
-        return file_exists($this->getPath());
+        if (!$Directory->exists()) {
+            return false;
+        }
+
+        copy($this->getPath(), $Directory->getPath() . DIRECTORY_SEPARATOR . $this->getName());
+        return true;
     }
 
+    /**
+     * @return File
+     * @throws Exception
+     */
     public function create()
     {
         if ($this->exists()) {
-            throw new Exception("Файл \"{$this->getPath()}\" уже существует.");
+            throw new Exception("File \"{$this->getPath()}\" already exists.");
         }
 
         $handler = fopen($this->getPath(), 'w');
@@ -53,29 +53,27 @@ class File extends IO implements InterfaceIOFile
         return $this;
     }
 
+    /**
+     * @return File
+     */
     public function delete()
     {
         unlink($this->getPath());
         return $this;
     }
 
-    public function appendContent($content)
+    /**
+     * @return string
+     */
+    public function getExtension()
     {
-        file_put_contents($this->getPath(), $content, FILE_APPEND);
-        return $this;
+        return pathinfo($this->getPath(), PATHINFO_EXTENSION);
     }
 
-    public function setContent($content)
-    {
-        file_put_contents($this->getPath(), $content);
-        return $this;
-    }
-
-    public function read()
-    {
-        return $this->exists() ? file_get_contents($this->path) : null;
-    }
-
+    /**
+     * @param InterfaceIODirectory $Directory
+     * @return bool
+     */
     public function moveTo(InterfaceIODirectory $Directory)
     {
         if (!$Directory->exists()) {
@@ -91,14 +89,22 @@ class File extends IO implements InterfaceIOFile
         return $success;
     }
 
-    public function copyTo(InterfaceIODirectory $Directory)
+    /**
+     * @return null|string
+     */
+    public function read()
     {
-        if (!$Directory->exists()) {
-            return false;
-        }
+        return $this->exists() ? file_get_contents($this->path) : null;
+    }
 
-        copy($this->getPath(), $Directory->getPath() . DIRECTORY_SEPARATOR . $this->getName());
-        return true;
+    /**
+     * @param string $content
+     * @return File
+     */
+    public function setContent($content)
+    {
+        file_put_contents($this->getPath(), $content);
+        return $this;
     }
 
 }
