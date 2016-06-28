@@ -1,23 +1,22 @@
 <?php
-namespace SFileSystem\Classes;
+namespace SFileSystem;
 
 
 use Exception;
-use SFileSystem\Interfaces\InterfaceIODirectory;
 
-class Directory extends IO implements InterfaceIODirectory
+class Directory extends IO implements DirectoryInterface
 {
 
-    /** @var Directory[] */
+    /** @var DirectoryInterface[] */
     protected $Directories = [];
-    /** @var File[] */
+    /** @var FileInterface[] */
     protected $Files = [];
 
     /**
-     * @param InterfaceIODirectory $Directory
+     * @param DirectoryInterface $Directory
      * @return bool
      */
-    public function copyTo(InterfaceIODirectory $Directory)
+    public function copyTo(DirectoryInterface $Directory)
     {
         if (!$Directory->exists()) {
             return false;
@@ -56,7 +55,7 @@ class Directory extends IO implements InterfaceIODirectory
 
     /**
      * @param string $directoryName
-     * @return null|Directory
+     * @return null|DirectoryInterface
      * @throws Exception
      */
     public function createDirectory($directoryName)
@@ -71,7 +70,7 @@ class Directory extends IO implements InterfaceIODirectory
 
     /**
      * @param string $fileName
-     * @return null|File
+     * @return null|FileInterface
      * @throws Exception
      */
     public function createFile($fileName)
@@ -108,7 +107,7 @@ class Directory extends IO implements InterfaceIODirectory
 
     /**
      * @param string $directoryName
-     * @return null|Directory
+     * @return null|DirectoryInterface
      */
     public function getDirectory($directoryName)
     {
@@ -120,7 +119,7 @@ class Directory extends IO implements InterfaceIODirectory
     }
 
     /**
-     * @return Directory[]
+     * @return DirectoryInterface[]
      */
     public function getDirectories()
     {
@@ -129,7 +128,7 @@ class Directory extends IO implements InterfaceIODirectory
 
     /**
      * @param string $fileName
-     * @return null|File
+     * @return null|FileInterface
      */
     public function getFile($fileName)
     {
@@ -149,10 +148,10 @@ class Directory extends IO implements InterfaceIODirectory
     }
 
     /**
-     * @param InterfaceIODirectory $Directory
+     * @param DirectoryInterface $Directory
      * @return bool
      */
-    public function moveTo(InterfaceIODirectory $Directory)
+    public function moveTo(DirectoryInterface $Directory)
     {
         if (!$Directory->exists()) {
             return false;

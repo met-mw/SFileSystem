@@ -1,50 +1,50 @@
 <?php
-namespace SFileSystem\Interfaces;
+namespace SFileSystem;
 
 /**
- * Interface InterfaceIODirectory
- * @package SFileSystem\Interfaces
+ * Interface DirectoryInterface
+ * @package SFileSystem
  */
-interface InterfaceIODirectory extends InterfaceIO
+interface DirectoryInterface extends IOInterface
 {
 
     /**
      * @param string $directoryName
-     * @return InterfaceIODirectory
+     * @return DirectoryInterface
      */
     public function createDirectory($directoryName);
 
     /**
      * @param string $fileName
-     * @return InterfaceIOFile
+     * @return FileInterface
      */
     public function createFile($fileName);
 
     /**
      * @param string $directoryName
-     * @return InterfaceIODirectory
+     * @return DirectoryInterface
      */
     public function getDirectory($directoryName);
 
     /**
-     * @return InterfaceIODirectory[]
+     * @return DirectoryInterface[]
      */
     public function getDirectories();
 
     /**
      * @param string $fileName
-     * @return InterfaceIOFile
+     * @return FileInterface
      */
     public function getFile($fileName);
 
     /**
-     * @return InterfaceIOFile[]
+     * @return FileInterface[]
      */
     public function getFiles();
 
     /**
      * @param bool|false $recursive
-     * @return InterfaceIODirectory
+     * @return DirectoryInterface
      */
     public function scan($recursive = false);
 

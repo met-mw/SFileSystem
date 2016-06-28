@@ -1,6 +1,7 @@
 {
     "name": "met_mw/sfilesystem",
     "type": "library",
+    "description": "Independent universal library to work with files and directories.",
     "keywords": ["universal", "io", "file", "directory", "filesystem", "independent"],
     "license": "MIT",
     "authors": [

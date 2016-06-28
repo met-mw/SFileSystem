@@ -1,21 +1,19 @@
 <?php
-namespace SFileSystem\Classes;
+namespace SFileSystem;
 
 
 use Exception;
-use SFileSystem\Interfaces\InterfaceIODirectory;
-use SFileSystem\Interfaces\InterfaceIOFile;
 
 /**
  * Class File
- * @package SFileSystem\Classes
+ * @package SFileSystem
  */
-class File extends IO implements InterfaceIOFile
+class File extends IO implements FileInterface
 {
 
     /**
      * @param string $content
-     * @return File
+     * @return FileInterface
      */
     public function appendContent($content)
     {
@@ -24,10 +22,10 @@ class File extends IO implements InterfaceIOFile
     }
 
     /**
-     * @param InterfaceIODirectory $Directory
+     * @param DirectoryInterface $Directory
      * @return bool
      */
-    public function copyTo(InterfaceIODirectory $Directory)
+    public function copyTo(DirectoryInterface $Directory)
     {
         if (!$Directory->exists()) {
             return false;
@@ -38,7 +36,7 @@ class File extends IO implements InterfaceIOFile
     }
 
     /**
-     * @return File
+     * @return FileInterface
      * @throws Exception
      */
     public function create()
@@ -54,7 +52,7 @@ class File extends IO implements InterfaceIOFile
     }
 
     /**
-     * @return File
+     * @return FileInterface
      */
     public function delete()
     {
@@ -71,10 +69,10 @@ class File extends IO implements InterfaceIOFile
     }
 
     /**
-     * @param InterfaceIODirectory $Directory
+     * @param DirectoryInterface $Directory
      * @return bool
      */
-    public function moveTo(InterfaceIODirectory $Directory)
+    public function moveTo(DirectoryInterface $Directory)
     {
         if (!$Directory->exists()) {
             return false;
@@ -99,7 +97,7 @@ class File extends IO implements InterfaceIOFile
 
     /**
      * @param string $content
-     * @return File
+     * @return FileInterface
      */
     public function setContent($content)
     {

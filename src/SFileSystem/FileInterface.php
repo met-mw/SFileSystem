@@ -1,11 +1,11 @@
 <?php
-namespace SFileSystem\Interfaces;
+namespace SFileSystem;
 
 /**
- * Interface InterfaceIOFile
- * @package SFileSystem\Interfaces
+ * Interface FileInterface
+ * @package SFileSystem
  */
-interface InterfaceIOFile extends InterfaceIO
+interface FileInterface extends IOInterface
 {
 
     /**

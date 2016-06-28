@@ -1,14 +1,12 @@
 <?php
-namespace SFileSystem\Classes;
+namespace SFileSystem;
 
-
-use SFileSystem\Interfaces\InterfaceIO;
 
 /**
  * Class IO
- * @package SFileSystem\Classes
+ * @package SFileSystem
  */
-abstract class IO implements InterfaceIO
+abstract class IO implements IOInterface
 {
 
     /** @var string */
@@ -40,7 +38,7 @@ abstract class IO implements InterfaceIO
     }
 
     /**
-     * @return Directory
+     * @return DirectoryInterface
      */
     public function getParentDirectory()
     {

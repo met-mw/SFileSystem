@@ -1,11 +1,11 @@
 <?php
-namespace SFileSystem\Interfaces;
+namespace SFileSystem;
 
 /**
- * Interface InterfaceIO
- * @package SFileSystem\Interfaces
+ * Interface IOInterface
+ * @package SFileSystem
  */
-interface InterfaceIO
+interface IOInterface
 {
 
     /**
@@ -14,10 +14,10 @@ interface InterfaceIO
     public function create();
 
     /**
-     * @param InterfaceIODirectory $Directory
+     * @param DirectoryInterface $Directory
      * @return bool
      */
-    public function copyTo(InterfaceIODirectory $Directory);
+    public function copyTo(DirectoryInterface $Directory);
 
     /**
      * @return $this
@@ -35,7 +35,7 @@ interface InterfaceIO
     public function getName();
 
     /**
-     * @return InterfaceIODirectory
+     * @return DirectoryInterface
      */
     public function getParentDirectory();
 
@@ -45,10 +45,10 @@ interface InterfaceIO
     public function getPath();
 
     /**
-     * @param InterfaceIODirectory $Directory
+     * @param DirectoryInterface $Directory
      * @return bool
      */
-    public function moveTo(InterfaceIODirectory $Directory);
+    public function moveTo(DirectoryInterface $Directory);
 
     /**
      * @param string $path
